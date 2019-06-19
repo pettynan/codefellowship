@@ -2,16 +2,30 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Trying to fix</title>
+    <title th:text="'CodeFellowship - ' + ${user.firstName} + ' ' + ${user.lastName}"></title>
 </head>
 <body>
-
+<div th:replace="fragments/header :: potato">...</div>
 <img src="https://stickershop.line-scdn.net/stickershop/v1/product/1348/LINEStorePC/main.png"/>
 <span th:text="${user.username}" ></span>
 <span th:text="${user.firstName}" ></span>
 <span th:text="${user.lastName}" ></span>
 <span th:text="${user.dateOfBirth}" ></span>
 <span th:text="${user.bio}" ></span>
+
+<h3 th:text="${user.firstName} + '\'s Posts:'"></h3>
+<ul>
+    <li th:each="post : ${user.posts}">
+        <span th:text="${post.body}"></span>
+    </li>
+</ul>
+
+<!--<span th:if="${user.username == p.name}">-->
+    <a href="/post">Create New Post</a>
+<!--</span>-->
+
+
+
 
 
 </body>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Post</title>
+</head>
+<body>
+<div th:replace="fragments/header :: potato">...</div>
+
+
+<h2>Create a New Post</h2>
+<form action="/post" method="POST">
+    Body: <input type="text" name="body" value="Type your post here..." />
+    <input type="submit" />
+</form>
+
+</body>
+</html>

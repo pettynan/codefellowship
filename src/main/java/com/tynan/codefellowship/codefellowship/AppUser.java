@@ -4,12 +4,10 @@ package com.tynan.codefellowship.codefellowship;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class AppUser implements UserDetails {
@@ -17,12 +15,19 @@ public class AppUser implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
 
+    @Column(unique = true)
     String username;
+
     String password;
     String firstName;
     String lastName;
     Date dateOfBirth;
     String bio;
+
+    @OneToMany(mappedBy = "author")
+    List<Post> posts;
+
+
 
     public AppUser() {}
     public AppUser(String username, String password, String firstName, String lastName, Date dateOfBirth, String bio) {
@@ -62,6 +67,14 @@ public class AppUser implements UserDetails {
     }
 
     public Date getDateOfBirth() { return this.dateOfBirth; }
+
+    public long getId() {
+        return id;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
 
     @Override
     public boolean isAccountNonExpired() {
