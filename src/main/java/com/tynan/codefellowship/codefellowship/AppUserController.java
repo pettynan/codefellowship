@@ -40,36 +40,35 @@ public class AppUserController {
     }
 
     @GetMapping("/signup")
-    public String getSignupPage() {
+    public String getSignupPage(Principal p, Model m) {
+        m.addAttribute("principal", p);
         return "signup";
     }
 
     @GetMapping("/login")
-    public String getLoginPage() {
+    public String getLoginPage(Principal p, Model m) {
+        m.addAttribute("principal", p);
         return "login";
     }
 
     @GetMapping("/")
-    public String getMainPage() {
+    public String getMainPage(Principal p, Model m) {
+        m.addAttribute("principal", p);
         return "mainpage";
     }
 
     @GetMapping("/myprofile")
     public String getMyProfile(Principal p, Model m) {
         AppUser currentUser = appUserRepository.findByUsername(p.getName());
-        System.out.println(currentUser.firstName);
         m.addAttribute("user", currentUser);
         return "userprofile";
     }
 
-
-
     @GetMapping("/users/{id}")
-    public String getUserProfile(@PathVariable Long id,
-            Model m) {
+    public String getUserProfile(@PathVariable Long id, Model m, Principal p) {
         AppUser queryUser = appUserRepository.findById(id).get();
-        System.out.println(queryUser.username);
         m.addAttribute("user", queryUser);
+        m.addAttribute("principal", p);
         return "userprofile";
     }
 }
