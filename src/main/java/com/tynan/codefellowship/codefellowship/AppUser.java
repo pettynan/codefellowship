@@ -49,6 +49,20 @@ public class AppUser implements UserDetails {
         return this.username;
     }
 
+    public String getFirstName() {
+        return this.firstName;
+    }
+
+    public String getLastName() {
+        return this.lastName;
+    }
+
+    public String getBio() {
+        return this.bio;
+    }
+
+    public Date getDateOfBirth() { return this.dateOfBirth; }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
