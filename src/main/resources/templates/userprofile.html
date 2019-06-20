@@ -13,6 +13,10 @@
 <span th:text="${user.dateOfBirth}" ></span>
 <span th:text="${user.bio}" ></span>
 
+<form method="POST" th:action="'/users/' + ${user.id} + '/follow'" >
+    <button type="submit">Follow</button>
+</form>
+
 <h3 th:text="${user.firstName} + '\'s Posts:'"></h3>
 <ul>
     <li th:each="post : ${user.posts}">

@@ -1,0 +1,7 @@
+<ul th:fragment="usersList" xmlns:th="xmlns:th=http://www.thymeleaf.org">
+    <li th:each="user : ${allUsers}">
+        <a th:href="@{'/users/' + ${user.id}}">
+            <span th:text="${user.firstName} + ' ' + ${user.lastName}"></span>, username <span th:text="${user.username}"></span>
+        </a>
+    </li>
+</ul>
