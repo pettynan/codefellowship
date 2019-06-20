@@ -17,6 +17,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Controller
 public class AppUserController {
@@ -71,4 +73,29 @@ public class AppUserController {
         m.addAttribute("principal", p);
         return "userprofile";
     }
+
+    @PostMapping("/users/{id}/follow")
+    public RedirectView followUser(@PathVariable Long id, Principal p, Model m) {
+        // Get the currently logged in user and target user objects
+        AppUser currentUser = appUserRepository.findByUsername(p.getName());
+        AppUser followedUser = appUserRepository.findById(id).get();
+
+        // Make them follow/be followed by each other
+        currentUser.following.add(followedUser);
+        followedUser.followers.add(currentUser);
+
+        // Save changes to the repository
+        appUserRepository.save(currentUser);
+        appUserRepository.save(followedUser);
+
+        return new RedirectView("/users/" + id);
+    }
+
+    @GetMapping("/userindex")
+    public String getUserIndex(Model m) {
+        Iterable<AppUser> allUsers = appUserRepository.findAll();
+        m.addAttribute("allUsers", allUsers);
+        return "userIndex";
+    }
+
 }
