@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<div th:replace="fragments/header :: potato">...</div>
+<div th:replace="fragments/header :: navigation">...</div>
 
 <li th:each="post : ${posts}">
     <a th:href="@{'/users/' + ${post.author.id}}">
